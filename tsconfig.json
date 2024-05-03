@@ -25,10 +25,7 @@
   "include": [
     "src"
   ],
-<<<<<<< HEAD
   "exclude": [
     "node_modules"
   ]
-=======
->>>>>>> 92a44b762de787f59cf396d1835dec00350ddee0
 }
