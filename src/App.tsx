@@ -4,7 +4,7 @@ import "./App.css";
 import TodoInsert from "./components/TodoInsert";
 import TodoList from "./components/TodoList";
 import TodoEdit from "./components/TodoEdit";
-import useSpeechRecognition from "./hooks/useSpeechRecognition";
+// import useSpeechRecognition from "./hooks/useSpeechRecognition";
 // import TodoInsert
 
 export interface Todo {
@@ -13,13 +13,13 @@ export interface Todo {
   checked: boolean;
 }
 function App() {
-  const {
-    text,
-    startListening,
-    stopListening,
-    isListening,
-    hasRecognitionSupport,
-  } = useSpeechRecognition();
+  // const {
+  //   text,
+  //   startListening,
+  //   stopListening,
+  //   isListening,
+  //   hasRecognitionSupport,
+  // } = useSpeechRecognition();
 
   const [todos, setTodos] = useState<Todo[]>([
     {
@@ -115,7 +115,7 @@ function App() {
       {insertToggle && selectedTodo && (
         <TodoEdit selectedTodo={selectedTodo} onUpdate={onUpdate} />
       )}
-      <div>
+      {/* <div>
         {hasRecognitionSupport ? (
           <>
             <div>
@@ -132,7 +132,7 @@ function App() {
         ) : (
           <h1>Your browser has no speech recognition support</h1>
         )}
-      </div>
+      </div> */}
     </div>
   );
 }
