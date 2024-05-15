@@ -15,7 +15,7 @@ const useSpeechRecognition = () => {
     if (!recognition) return;
 
     recognition.onresult = (event: SpeechRecognitionEvent) => {
-      console.log("onresult event: ", event);
+      //   console.log("onresult event: ", event);
       setText(event.results[0][0].transcript);
       recognition.stop();
       setIsListening(false);
@@ -23,15 +23,21 @@ const useSpeechRecognition = () => {
   }, []);
 
   const startListening = () => {
-    setText("");
-    setIsListening(true);
-    recognition.start();
+    if (!isListening) {
+      setText("");
+      setIsListening(true);
+      recognition.start();
+      console.log(`녹음 시작`);
+    }
   };
 
   const stopListening = () => {
-    setText("");
-    setIsListening(false);
-    recognition.stop();
+    if (isListening) {
+      setText("");
+      setIsListening(false);
+      recognition.stop();
+      console.log(`녹음 끝 : ${text}`);
+    }
   };
 
   return {

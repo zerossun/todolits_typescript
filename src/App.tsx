@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from "react";
+import React, {useCallback, useEffect, useRef, useState} from "react";
 
 import "./App.css";
 import TodoInsert from "./components/TodoInsert";
@@ -46,7 +46,7 @@ function App() {
   //any 쓰기 싫은데 any외에는 다 오류가 먹어서 안됨....
   const nextId = useRef<number>(4);
 
-  const onInsert = (text: string) => {
+  const onInsert = useCallback((text: string) => {
     const todo: Todo = {
       id: nextId.current,
       text,
@@ -54,9 +54,9 @@ function App() {
     };
     // setTodos(todos.concat(todo))
     setTodos((prevTodos) => [...prevTodos, todo]);
-
+    console.log("이건 뭐고");
     nextId.current++;
-  };
+  }, []);
 
   const onToggle = (id: number) => {
     // setTodos(todos.map((todo) => todo.id === id ? { ...todo, checked: !todo.checked } : todo))

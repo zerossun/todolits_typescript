@@ -22,15 +22,18 @@
 //   )
 // }
 
+import React from "react";
+import classnames from "classnames";
 
-import React from 'react'
-import classnames from 'classnames';
-
-import { MdCheckBox, MdCheckBoxOutlineBlank, MdModeEditOutline, MdRemoveCircleOutline } from 'react-icons/md';
-import type {Todo} from '../App'
+import {
+  MdCheckBox,
+  MdCheckBoxOutlineBlank,
+  MdModeEditOutline,
+  MdRemoveCircleOutline,
+} from "react-icons/md";
+import type {Todo} from "../App";
 
 interface ToDoListProps {
-  
   todo: Todo;
   onToggle: (id: number) => void;
   onDelete: (id: number) => void;
@@ -38,30 +41,44 @@ interface ToDoListProps {
   onInsertToggle: () => void;
 }
 
-const ToDoListItem: React.FC<ToDoListProps>=({ todo, onToggle, onDelete, onchangeSelectedTodo, onInsertToggle }) => {
-  
-  console.log(todo);
-  
-  const { id, text, checked } = todo;
-  
-    return (
-    <li className='flex items-center'>
-          <div onClick={()=>onToggle(id)} className={classnames('checkbox', { checked: checked }, "flex items-center")}>
-              {checked ? <MdCheckBox /> : <MdCheckBoxOutlineBlank />}
-              <p>{ text }</p>
-        </div>
-        <button className='flex-none w-auto'
-          onClick={() =>
-            { onchangeSelectedTodo(todo);
-              onInsertToggle();
-            }
-             }
-        ><MdModeEditOutline /></button>
-          <button className='flex-none w-auto' onClick={()=>onDelete(id)}>
-              <MdRemoveCircleOutline />
-          </button>
+const ToDoListItem: React.FC<ToDoListProps> = ({
+  todo,
+  onToggle,
+  onDelete,
+  onchangeSelectedTodo,
+  onInsertToggle,
+}) => {
+  // console.log(todo);
+
+  const {id, text, checked} = todo;
+
+  return (
+    <li className="flex items-center">
+      <div
+        onClick={() => onToggle(id)}
+        className={classnames(
+          "checkbox",
+          {checked: checked},
+          "flex items-center"
+        )}
+      >
+        {checked ? <MdCheckBox /> : <MdCheckBoxOutlineBlank />}
+        <p className="flex-none w-auto">{text}</p>
+      </div>
+      <button
+        className="flex-none w-auto"
+        onClick={() => {
+          onchangeSelectedTodo(todo);
+          onInsertToggle();
+        }}
+      >
+        <MdModeEditOutline />
+      </button>
+      <button className="flex-none w-auto" onClick={() => onDelete(id)}>
+        <MdRemoveCircleOutline />
+      </button>
     </li>
-  )
-}
+  );
+};
 
 export default ToDoListItem;
