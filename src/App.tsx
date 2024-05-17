@@ -21,6 +21,9 @@ function App() {
   //   hasRecognitionSupport,
   // } = useSpeechRecognition();
 
+
+  //recoil로 변경
+  // setTodos로 useSpeech까지 내리기(branch 두개 파서)
   const [todos, setTodos] = useState<Todo[]>([
     {
       id: 1,
@@ -54,7 +57,6 @@ function App() {
     };
     // setTodos(todos.concat(todo))
     setTodos((prevTodos) => [...prevTodos, todo]);
-    console.log("이건 뭐고");
     nextId.current++;
   }, []);
 
@@ -104,7 +106,7 @@ function App() {
 
   return (
     <div>
-      <TodoInsert onInsert={onInsert} />
+      <TodoInsert onInsert={onInsert} todos={todos}/>
       <TodoList
         todos={todos}
         onToggle={onToggle}

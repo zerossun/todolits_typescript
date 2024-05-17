@@ -68,12 +68,14 @@
 
 import React, {useEffect, useState} from "react";
 import useSpeechRecognition from "../hooks/useSpeechRecognition";
+import { Todo } from "../App";
 
 interface TodoInsertProps {
   onInsert: (text: string) => void;
+  todos: Todo[];
 }
 
-export default function TodoInsert({onInsert}: TodoInsertProps) {
+export default function TodoInsert({onInsert, todos}: TodoInsertProps) {
   //하단읜 받아온 것들 다시 지정한거고
   const {
     text,
@@ -81,21 +83,21 @@ export default function TodoInsert({onInsert}: TodoInsertProps) {
     stopListening,
     isListening,
     hasRecognitionSupport,
-  } = useSpeechRecognition();
+  } = useSpeechRecognition({todos});
 
   // 얘는 stop버튼 클릭했을 때만 submit이 될 수 있도록 usestate로 지정
-  const [isFirstRender, setIsFirstRender] = useState(true);
+  // const [isFirstRender, setIsFirstRender] = useState(true);
 
   // isfirstrender가 true가 아닐 때
-  useEffect(() => {
-    // 첫 번째 렌더링 후에는 호출하지 않도록 설정
-    if (!!isFirstRender) {
-      onInsert(text);
-      console.log("이건 뭐고");
-    } else {
-      setIsFirstRender(false);
-    }
-  }, [isFirstRender, onInsert, text]);
+  // useEffect(() => {
+  //   // 첫 번째 렌더링 후에는 호출하지 않도록 설정
+  //   if (!isFirstRender) {
+  //     onInsert(text);  
+      
+  //   } else {
+  //     setIsFirstRender(false);
+  //   }
+  // }, [isFirstRender, onInsert, text]);
 
   useEffect(() => {
     if (isListening) {

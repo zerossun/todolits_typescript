@@ -1,4 +1,5 @@
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
+import { Todo } from "../App";
 
 let recognition: any = null;
 if ("webkitSpeechRecognition" in window) {
@@ -7,7 +8,11 @@ if ("webkitSpeechRecognition" in window) {
   recognition.lang = "ko-KR";
 }
 
-const useSpeechRecognition = () => {
+interface useSpeechRecognitionProps {
+  todos: Todo[];
+}
+
+const useSpeechRecognition = ({todos}:useSpeechRecognitionProps) => {
   const [text, setText] = useState("");
   const [isListening, setIsListening] = useState(false);
 
@@ -33,7 +38,7 @@ const useSpeechRecognition = () => {
 
   const stopListening = () => {
     if (isListening) {
-      setText("");
+      console.log(todos)
       setIsListening(false);
       recognition.stop();
       console.log(`녹음 끝 : ${text}`);
