@@ -7,11 +7,15 @@ import TodoEdit from "./components/TodoEdit";
 // import useSpeechRecognition from "./hooks/useSpeechRecognition";
 // import TodoInsert
 
-export interface Todo {
-  id: number;
-  text: string;
-  checked: boolean;
-}
+import { useRecoilState } from 'recoil';
+import { todoState, Todo } from "./hooks/atoms";
+
+
+// export interface Todo {
+//   id: number;
+//   text: string;
+//   checked: boolean;
+// }
 function App() {
   // const {
   //   text,
@@ -105,7 +109,7 @@ function App() {
   };
 
   return (
-    <div>
+    <RecoilRoot>
       <TodoInsert onInsert={onInsert} todos={todos}/>
       <TodoList
         todos={todos}
@@ -135,7 +139,7 @@ function App() {
           <h1>Your browser has no speech recognition support</h1>
         )}
       </div> */}
-    </div>
+    </RecoilRoot>
   );
 }
 
