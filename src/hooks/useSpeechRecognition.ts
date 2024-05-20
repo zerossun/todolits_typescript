@@ -10,9 +10,10 @@ if ("webkitSpeechRecognition" in window) {
 
 interface useSpeechRecognitionProps {
   todos: Todo[];
+  onInsert: (text: string) => void;
 }
 
-const useSpeechRecognition = ({todos}:useSpeechRecognitionProps) => {
+const useSpeechRecognition = ({todos, onInsert}:useSpeechRecognitionProps) => {
   const [text, setText] = useState("");
   const [isListening, setIsListening] = useState(false);
 
@@ -31,6 +32,7 @@ const useSpeechRecognition = ({todos}:useSpeechRecognitionProps) => {
     if (!isListening) {
       setText("");
       setIsListening(true);
+      console.log(todos);
       recognition.start();
       console.log(`녹음 시작`);
     }
@@ -38,13 +40,15 @@ const useSpeechRecognition = ({todos}:useSpeechRecognitionProps) => {
 
   const stopListening = () => {
     if (isListening) {
-      console.log(todos)
+      onInsert(text);
+      console.log(todos);
       setIsListening(false);
       recognition.stop();
-      console.log(`녹음 끝 : ${text}`);
+      console.log(`녹음 끝 : ${text}`); 
     }
   };
 
+  
   return {
     text,
     isListening,

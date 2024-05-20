@@ -76,14 +76,15 @@ interface TodoInsertProps {
 }
 
 export default function TodoInsert({onInsert, todos}: TodoInsertProps) {
-  //하단읜 받아온 것들 다시 지정한거고
+  //하단은 받아온 것들 다시 지정한거고
   const {
     text,
     startListening,
     stopListening,
+    
     isListening,
     hasRecognitionSupport,
-  } = useSpeechRecognition({todos});
+  } = useSpeechRecognition({onInsert ,todos});
 
   // 얘는 stop버튼 클릭했을 때만 submit이 될 수 있도록 usestate로 지정
   // const [isFirstRender, setIsFirstRender] = useState(true);
