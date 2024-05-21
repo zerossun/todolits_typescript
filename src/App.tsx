@@ -7,9 +7,8 @@ import TodoEdit from "./components/TodoEdit";
 // import useSpeechRecognition from "./hooks/useSpeechRecognition";
 // import TodoInsert
 
-import { useRecoilState } from 'recoil';
-import { todoState, Todo } from "./hooks/atoms";
-
+import {useRecoilState} from "recoil";
+import {todoState, Todo} from "./hooks/atoms";
 
 // export interface Todo {
 //   id: number;
@@ -24,7 +23,6 @@ function App() {
   //   isListening,
   //   hasRecognitionSupport,
   // } = useSpeechRecognition();
-
 
   //recoil로 변경
   // setTodos로 useSpeech까지 내리기(branch 두개 파서)
@@ -109,8 +107,8 @@ function App() {
   };
 
   return (
-    <RecoilRoot>
-      <TodoInsert onInsert={onInsert} todos={todos}/>
+    <div>
+      <TodoInsert onInsert={onInsert} todos={todos} />
       <TodoList
         todos={todos}
         onToggle={onToggle}
@@ -139,7 +137,7 @@ function App() {
           <h1>Your browser has no speech recognition support</h1>
         )}
       </div> */}
-    </RecoilRoot>
+    </div>
   );
 }
 
