@@ -68,14 +68,17 @@
 
 import React, {useEffect, useState} from "react";
 import useSpeechRecognition from "../hooks/useSpeechRecognition";
-import { Todo } from "../App";
+import { useRecoilState } from 'recoil';
+import { todoState, Todo } from "../hooks/atoms";
 
 interface TodoInsertProps {
   onInsert: (text: string) => void;
   todos: Todo[];
 }
 
-export default function TodoInsert({onInsert, todos}: TodoInsertProps) {
+export default function TodoInsert({ onInsert }: TodoInsertProps) {
+  
+  const [todos, setTodos] = useRecoilState(todoState);
   //하단은 받아온 것들 다시 지정한거고
   const {
     text,
@@ -100,16 +103,29 @@ export default function TodoInsert({onInsert, todos}: TodoInsertProps) {
   //   }
   // }, [isFirstRender, onInsert, text]);
 
-  useEffect(() => {
-    if (isListening) {
-      startListening();
-    } else {
-      stopListening();
-    }
-  }, [isListening, startListening, stopListening]);
+  // useEffect(() => {
+  //   if (isListening) {
+  //     startListening();
+  //   } else {
+  //     stopListening();
+  //   }
+  // }, [isListening, startListening, stopListening]);
+  
+  const handleInsert = () => {
+    const newTodo: Todo = {
+      id: todos.length + 1,
+      text,
+      checked: false,
+    };
+    setTodos([...todos, newTodo]);
+    onInsert(text);
+  };
+
+
 
   const submit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    handleInsert();
     stopListening(); // 폼 제출 시 음성 인식 중지
   };
 

@@ -6,16 +6,11 @@ import TodoList from "./components/TodoList";
 import TodoEdit from "./components/TodoEdit";
 // import useSpeechRecognition from "./hooks/useSpeechRecognition";
 // import TodoInsert
-
 import { useRecoilState } from 'recoil';
 import { todoState, Todo } from "./hooks/atoms";
 
 
-// export interface Todo {
-//   id: number;
-//   text: string;
-//   checked: boolean;
-// }
+
 function App() {
   // const {
   //   text,
@@ -28,23 +23,8 @@ function App() {
 
   //recoil로 변경
   // setTodos로 useSpeech까지 내리기(branch 두개 파서)
-  const [todos, setTodos] = useState<Todo[]>([
-    {
-      id: 1,
-      text: "example1",
-      checked: true,
-    },
-    {
-      id: 2,
-      text: "example2",
-      checked: false,
-    },
-    {
-      id: 3,
-      text: "example3",
-      checked: true,
-    },
-  ]);
+  const [todos, setTodos] = useRecoilState(todoState);
+
 
   useEffect(() => {
     window.localStorage.setItem("todoItem", JSON.stringify(todos));
@@ -66,8 +46,15 @@ function App() {
 
   const onToggle = (id: number) => {
     // setTodos(todos.map((todo) => todo.id === id ? { ...todo, checked: !todo.checked } : todo))
-    setTodos((prevTodo) =>
-      prevTodo.map((todo) =>
+    
+    // setTodos((prevTodo) =>
+    //   prevTodo.map((todo) =>
+    //     todo.id === id ? {...todo, checked: !todo.checked} : todo
+    //   )
+    // );
+
+    setTodos(
+      todos.map((todo) =>
         todo.id === id ? {...todo, checked: !todo.checked} : todo
       )
     );
@@ -109,7 +96,7 @@ function App() {
   };
 
   return (
-    <RecoilRoot>
+    <div>
       <TodoInsert onInsert={onInsert} todos={todos}/>
       <TodoList
         todos={todos}
@@ -139,7 +126,7 @@ function App() {
           <h1>Your browser has no speech recognition support</h1>
         )}
       </div> */}
-    </RecoilRoot>
+    </div>
   );
 }
 
