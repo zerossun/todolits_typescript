@@ -1,29 +1,47 @@
 import React, {useCallback, useEffect, useRef, useState} from "react";
 
-import "./App.css";
 import TodoInsert from "./components/TodoInsert";
 import TodoList from "./components/TodoList";
 import TodoEdit from "./components/TodoEdit";
-// import useSpeechRecognition from "./hooks/useSpeechRecognition";
-// import TodoInsert
-
+import styled from "styled-components";
+import {ThemeProvider} from "styled-components";
+import theme from "./scss/theme";
+import "./App.css";
 export interface Todo {
   id: number;
   text: string;
   checked: boolean;
 }
+
+const Back = styled.div`
+  width: 100%;
+  height: 100vh;
+  padding-top: 32px;
+  background: ${({theme}) => theme.colors.main};
+`;
+
+const Box = styled.div`
+  position: relative;
+  left: 50%;
+  top:50%;
+  transform: translate(-50%, -50%);
+  width: auto;
+  min-height: 480px;
+  max-width: 360px;
+}
+`;
+
+const Notice = styled.h2`
+  font-size: 2rem;
+  font-weight: 700;
+  text-align: center;
+  border-radius: 16px 16px 0 0;
+  padding: 16px;
+  box-sizing: border-box;
+  color: ${({theme}) => theme.colors.white};
+  background: ${({theme}) => theme.colors.sub2};
+`;
 function App() {
-  // const {
-  //   text,
-  //   startListening,
-  //   stopListening,
-  //   isListening,
-  //   hasRecognitionSupport,
-  // } = useSpeechRecognition();
-
-
-  //recoil로 변경
-  // setTodos로 useSpeech까지 내리기(branch 두개 파서)
   const [todos, setTodos] = useState<Todo[]>([
     {
       id: 1,
@@ -105,37 +123,26 @@ function App() {
   };
 
   return (
-    <div>
-      <TodoInsert onInsert={onInsert} todos={todos}/>
-      <TodoList
-        todos={todos}
-        onToggle={onToggle}
-        onDelete={onDelete}
-        onchangeSelectedTodo={setSelectedTodo}
-        onInsertToggle={onInsertToggle}
-      />
-      {insertToggle && selectedTodo && (
-        <TodoEdit selectedTodo={selectedTodo} onUpdate={onUpdate} />
-      )}
-      {/* <div>
-        {hasRecognitionSupport ? (
-          <>
-            <div>
-              <button onClick={startListening}>start Listening</button>
-            </div>
-            <div>
-              <button onClick={stopListening}>stop Lisetening</button>
-            </div>
-            {isListening ? (
-              <div>Your browser is currently listening</div>
-            ) : null}
-            {text}
-          </>
-        ) : (
-          <h1>Your browser has no speech recognition support</h1>
-        )}
-      </div> */}
-    </div>
+    <ThemeProvider theme={theme}>
+      <Back>
+        <Box>
+          <Notice>
+            <span style={{color: "red"}}>Rec</span>. TODOLIST
+          </Notice>
+          <TodoInsert onInsert={onInsert} todos={todos} />
+          <TodoList
+            todos={todos}
+            onToggle={onToggle}
+            onDelete={onDelete}
+            onchangeSelectedTodo={setSelectedTodo}
+            onInsertToggle={onInsertToggle}
+          />
+          {insertToggle && selectedTodo && (
+            <TodoEdit selectedTodo={selectedTodo} onUpdate={onUpdate} />
+          )}
+        </Box>
+      </Back>
+    </ThemeProvider>
   );
 }
 

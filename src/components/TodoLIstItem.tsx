@@ -1,36 +1,11 @@
-// import React from 'react'
-// import classNames from 'classnames';
-// import { MdCheckBox, MdCheckBoxOutlineBlank, MdModeEditOutline, MdRemoveCircleOutline} from 'react-icons/md';
-
-// export default function TodoLIstItem({todo, onToggle, onDelete, onchangeSelectedTodo, onInsertToggle}) {
-//   const { id, text, checked } = todo;
-//   console.log(text);
-//   return (
-//       <div className='flex items-center'>
-//           <div onClick={()=>onToggle(id)} className={classNames('checkbox', {checked: checked},'flex items-end')}>
-//           {checked ? <MdCheckBox/> : <MdCheckBoxOutlineBlank/>}
-//         <p>{text}</p>
-//           </div>
-//       <button onClick={() => {
-//         onchangeSelectedTodo(todo);
-//         onInsertToggle(todo);
-//       }}>
-//         <MdModeEditOutline />
-//       </button>
-//       <button onClick={()=>onDelete(id)}><MdRemoveCircleOutline /></button>
-//     </div>
-//   )
-// }
-
 import React from "react";
 import classnames from "classnames";
-
-import {
-  MdCheckBox,
-  MdCheckBoxOutlineBlank,
-  MdModeEditOutline,
-  MdRemoveCircleOutline,
-} from "react-icons/md";
+import styled from "styled-components";
+import {ReactComponent as CheckActive} from "../assets/CheckActive.svg";
+import {ReactComponent as CheckDisabled} from "../assets/CheckDisabled.svg";
+import {ReactComponent as Modify} from "../assets/Modify.svg";
+import {ReactComponent as Delete} from "../assets/Delete.svg";
+import {ComButton, Typography} from "../scss/Global";
 import type {Todo} from "../App";
 
 interface ToDoListProps {
@@ -41,6 +16,26 @@ interface ToDoListProps {
   onInsertToggle: () => void;
 }
 
+const Li = styled.li`
+  display: flex;
+  align-items: center;
+  width: calc(100% - 12px);
+  justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 1px solid ${({theme}) => theme.colors.disabled};
+  &:last-child {
+    border-bottom: 0px;
+  }
+`;
+const Stack = styled.div`
+  display: flex;
+  align-items: center;
+  width: 100%;
+`;
+
+const ButtonDiv = styled.div`
+  display: flex;
+`;
 const ToDoListItem: React.FC<ToDoListProps> = ({
   todo,
   onToggle,
@@ -53,8 +48,8 @@ const ToDoListItem: React.FC<ToDoListProps> = ({
   const {id, text, checked} = todo;
 
   return (
-    <li className="flex items-center">
-      <div
+    <Li className="flex items-center">
+      <Stack
         onClick={() => onToggle(id)}
         className={classnames(
           "checkbox",
@@ -62,22 +57,35 @@ const ToDoListItem: React.FC<ToDoListProps> = ({
           "flex items-center"
         )}
       >
-        {checked ? <MdCheckBox /> : <MdCheckBoxOutlineBlank />}
-        <p className="flex-none w-auto">{text}</p>
-      </div>
-      <button
-        className="flex-none w-auto"
-        onClick={() => {
-          onchangeSelectedTodo(todo);
-          onInsertToggle();
-        }}
-      >
-        <MdModeEditOutline />
-      </button>
-      <button className="flex-none w-auto" onClick={() => onDelete(id)}>
-        <MdRemoveCircleOutline />
-      </button>
-    </li>
+        {checked ? <CheckActive /> : <CheckDisabled />}
+        <Typography
+          style={{
+            marginLeft: "8px",
+            width: "100%",
+            maxWidth: "230px",
+            whiteSpace: "nowrap",
+            textOverflow: "ellipsis",
+            overflow: "hidden",
+          }}
+        >
+          {text}
+        </Typography>
+      </Stack>
+      <ButtonDiv>
+        <ComButton
+          className="flex-none w-auto"
+          onClick={() => {
+            onchangeSelectedTodo(todo);
+            onInsertToggle();
+          }}
+        >
+          <Modify />
+        </ComButton>
+        <ComButton className="flex-none w-auto" onClick={() => onDelete(id)}>
+          <Delete />
+        </ComButton>
+      </ButtonDiv>
+    </Li>
   );
 };
 

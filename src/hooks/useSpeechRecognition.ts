@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { Todo } from "../App";
+import {useEffect, useState} from "react";
+import {Todo} from "../App";
 
 let recognition: any = null;
 if ("webkitSpeechRecognition" in window) {
@@ -13,7 +13,7 @@ interface useSpeechRecognitionProps {
   onInsert: (text: string) => void;
 }
 
-const useSpeechRecognition = ({todos, onInsert}:useSpeechRecognitionProps) => {
+const useSpeechRecognition = ({todos, onInsert}: useSpeechRecognitionProps) => {
   const [text, setText] = useState("");
   const [isListening, setIsListening] = useState(false);
 
@@ -21,34 +21,36 @@ const useSpeechRecognition = ({todos, onInsert}:useSpeechRecognitionProps) => {
     if (!recognition) return;
 
     recognition.onresult = (event: SpeechRecognitionEvent) => {
-      //   console.log("onresult event: ", event);
-      setText(event.results[0][0].transcript);
-      recognition.stop();
+      const transcript = event.results[0][0].transcript;
+      setText(transcript);
+      setIsListening(false);
+      onInsert(transcript);
+    };
+
+    recognition.onerror = () => {
       setIsListening(false);
     };
-  }, []);
+
+    return () => {
+      recognition.stop();
+    };
+  }, [onInsert]);
 
   const startListening = () => {
     if (!isListening) {
       setText("");
       setIsListening(true);
-      console.log(todos);
       recognition.start();
-      console.log(`녹음 시작`);
     }
   };
 
   const stopListening = () => {
     if (isListening) {
-      onInsert(text);
-      console.log(todos);
-      setIsListening(false);
       recognition.stop();
-      console.log(`녹음 끝 : ${text}`); 
+      setIsListening(false);
     }
   };
 
-  
   return {
     text,
     isListening,
