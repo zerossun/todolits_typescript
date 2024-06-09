@@ -1,46 +1,46 @@
-# Getting Started with Create React App
+# Rec. todolist
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+#### speech recognition api api를 이용하여 녹음으로 기록을 할 수 있는 프로그램을 개발하였습니다.
 
-## Available Scripts
+<img width="983" alt="20240601213737" src="https://github.com/zerossun/typetest1/assets/130970089/a4de7e3d-ffcf-4f60-ad85-dc2032d7781f">
 
-In the project directory, you can run:
+### Stacks
 
-### `npm start`
+<div>
+ <img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=black"> 
+<img src="https://img.shields.io/badge/Typescript-3178C6?style=for-the-badge&logo=Typescript&logoColor=white" />
+ <img src="https://img.shields.io/badge/sass-CC6699?style=for-the-badge&logo=sass&logoColor=white"> 
+ <img src="https://img.shields.io/badge/styled--components-DB7093?style=for-the-badge&logo=styled-components&logoColor=ffd35b" />
+ <img src="https://img.shields.io/badge/Visual Studio Code-007ACC?style=for-the-badge&logo=Visual Studio Code&logoColor=white" />
+ </div>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### 시작 가이드
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+<ul>
+  <li>Node.js 21.1.0</li>
+  <li>NPM 10.2.0</li>
+  <li>$ npm install</li>
+  <li>$ npm run dev</li>
+</ul>
 
-### `npm test`
+### 주요 기능
+<dl>
+  <dt>⭐ 녹음 후, 리스트에 사항에 자동으로 작성</dt>
+  <dt>⭐ 수정 버튼 클릭 시, 텍스트 수정 기능</dt>
+  <dt>⭐ 삭제 버튼 클릭 시. 리스트 삭제 기능</dt>
+</dl>
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+### 화면 구성
+<table>
+  <tr>
+    <th colspan="2">상세 화면</th>
+  </tr>
+  <tr>
+    <td>
+      <img src='https://github.com/zerossun/typetest1/assets/130970089/88d60541-9ebe-4cfe-999a-93ecaf380144'>
+    </td>
+    <td>
+      <img src='https://github.com/zerossun/typetest1/assets/130970089/01512d23-b1c9-40f9-bf72-383689b4d540'>
+    </td>
+  </tr>
+</table>
